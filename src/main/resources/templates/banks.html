@@ -10,8 +10,9 @@
     <h2>List and add bank</h2>
 
     <section id="add-bank">
-      <form method="post">
-        <input type="text" placeholder="Nama Bank">
+      <form method="post"  th:action="@{/bank/save}" th:object="${bankForm}">
+        <input type="text" placeholder="Nama Bank" th:field="*{bank}">
+        <p class="help is-danger" th:if="${#fields.hasErrors('bank')}" th:errors="*{bank}"></p>
         <br>
         <button type="submit">Tambah</button>
       </form>
@@ -19,8 +20,13 @@
 
 
     <section id="list-bank">
-      <table>
-
+      <table border="1">
+        <tr>
+          <td>Nama Bank</td>
+        </tr>
+        <tr th:each="bank : ${banks}">
+          <td th:text="${bank.bank}"></td>
+        </tr>
       </table>
     </section>
 

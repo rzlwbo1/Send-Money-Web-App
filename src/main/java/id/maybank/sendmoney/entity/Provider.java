@@ -1,6 +1,8 @@
 package id.maybank.sendmoney.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -11,6 +13,7 @@ public class Provider {
     private Long id;
 
     @NotNull
+    @NotBlank
     @Column(unique = true)
     private String bank;
 
@@ -28,5 +31,12 @@ public class Provider {
 
     public void setBank(String bank) {
         this.bank = bank;
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" +
+                "bank='" + bank + '\'' +
+                '}';
     }
 }
