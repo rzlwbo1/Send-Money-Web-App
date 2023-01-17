@@ -50,9 +50,11 @@ public class SendmoneyApplication implements CommandLineRunner {
 		nasabah.setTipeIdentias("KTP");
 		nasabah.setRekenings(rekenings);
 
-		this.nasabahRepo.save(nasabah);
-		System.out.println(nasabah.getRekenings());
+//		rekening1.setNasabah(nasabah);
+//		rekening2.setNasabah(nasabah);
 
+		this.nasabahRepo.save(nasabah);
+//		System.out.println(rekening1.getNasabah().getFullName()) ;
 
 	}
 }

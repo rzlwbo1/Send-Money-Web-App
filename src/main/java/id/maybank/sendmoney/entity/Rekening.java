@@ -16,6 +16,10 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "nasabah_id")
+    private Nasabah nasabah;
+
     public Long getId() {
         return id;
     }
@@ -30,5 +34,13 @@ public class Rekening {
 
     public void setNoRek(String noRek) {
         this.noRek = noRek;
+    }
+
+    public Nasabah getNasabah() {
+        return nasabah;
+    }
+
+    public void setNasabah(Nasabah nasabah) {
+        this.nasabah = nasabah;
     }
 }
