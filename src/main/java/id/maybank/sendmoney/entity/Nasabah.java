@@ -1,13 +1,18 @@
 package id.maybank.sendmoney.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Nasabah {
@@ -16,13 +21,21 @@ public class Nasabah {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
+    @NotBlank
+    @NotEmpty
     @Size(min = 3)
     private String fullName;
-    private Date dob;
+    private LocalDate dob;
     private String noIdentitas;
     private String tipeIdentias;
     private String email;
     private String noContact;
+
+
+    //// Relasi ke rekening ////
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nasabah_id", referencedColumnName = "id")
+    private List<Rekening> rekenings;
 
     public Long getId() {
         return id;
@@ -40,11 +53,11 @@ public class Nasabah {
         this.fullName = fullName;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -78,6 +91,14 @@ public class Nasabah {
 
     public void setNoContact(String noContact) {
         this.noContact = noContact;
+    }
+
+    public List<Rekening> getRekenings() {
+        return rekenings;
+    }
+
+    public void setRekenings(List<Rekening> rekenings) {
+        this.rekenings = rekenings;
     }
 
     @Override

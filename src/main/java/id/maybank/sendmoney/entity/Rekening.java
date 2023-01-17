@@ -1,6 +1,7 @@
 package id.maybank.sendmoney.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
