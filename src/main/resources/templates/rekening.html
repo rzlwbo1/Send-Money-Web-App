@@ -11,6 +11,7 @@
     <section id="add-nasabah">
       <form method="post"  th:action="@{/rekening/save}">
         <input type="text" placeholder="Nama lengkap" th:value="${nasabah.fullName}" name="fullName">
+<!--        <p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
         <br>
 
         <input type="date" placeholder="Tanggal lahir" th:value="${nasabah.dob}" name="dob">
@@ -31,7 +32,9 @@
         <input type="text" placeholder="No rekening" th:value="${rekening.noRek}" name="noRek">
         <br>
 
-        <input type="text" placeholder="Bank" th:value="${provider.namaBank}" name="namaBank">
+        <select name="provider">
+          <option th:each="provider : ${providers}" th:value="${provider.id}" th:text="${provider.namaBank}"></option>
+        </select>
         <br>
 
         <button type="submit">Tambah</button>
