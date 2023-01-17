@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Nasabah {
+public class Nasabah{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,8 +33,7 @@ public class Nasabah {
 
 
     //// Relasi ke rekening ////
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nasabah_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "nasabah", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rekening> rekenings;
 
     public Long getId() {

@@ -5,6 +5,8 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 public class Rekening {
 
@@ -16,8 +18,10 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
+
+    //// Relasi ke nasabah ////
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "nasabah_id")
+    @JoinColumn(name = "nasabah_id")
     private Nasabah nasabah;
 
     public Long getId() {

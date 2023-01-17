@@ -17,6 +17,9 @@ public class Provider {
     @Column(unique = true)
     private String bank;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Rekening rekening;
+
     public Long getId() {
         return id;
     }
@@ -31,6 +34,14 @@ public class Provider {
 
     public void setBank(String bank) {
         this.bank = bank;
+    }
+
+    public Rekening getRekening() {
+        return rekening;
+    }
+
+    public void setRekening(Rekening rekening) {
+        this.rekening = rekening;
     }
 
     @Override
