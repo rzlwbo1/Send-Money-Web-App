@@ -18,9 +18,12 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
+    private Double saldo = 700000.0;
+
     //// Relasi ke provider ///
-    @OneToMany(mappedBy = "rekening", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Provider> providers;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "provider_id")
+    private Provider provider;
 
     //// Relasi ke nasabah ////
     @ManyToOne(fetch = FetchType.LAZY)
@@ -49,5 +52,31 @@ public class Rekening {
 
     public void setNasabah(Nasabah nasabah) {
         this.nasabah = nasabah;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
+
+    @Override
+    public String toString() {
+        return "Rekening{" +
+                "noRek='" + noRek + '\'' +
+                ", saldo=" + saldo +
+                ", provider=" + provider +
+                ", nasabah=" + nasabah +
+                '}';
     }
 }

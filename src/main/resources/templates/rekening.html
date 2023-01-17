@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Nasabah</title>
+</head>
+<body>
+
+  <div class="container">
+
+    <section id="add-nasabah">
+      <form method="post"  th:action="@{/rekening/save}">
+        <input type="text" placeholder="Nama lengkap" th:value="${nasabah.fullName}" name="fullName">
+        <br>
+
+        <input type="date" placeholder="Tanggal lahir" th:value="${nasabah.dob}" name="dob">
+        <br>
+
+        <input type="text" placeholder="No Identitas" th:value="${nasabah.noIdentitas}" name="noIdentitas">
+        <br>
+
+        <input type="text" placeholder="Tipe Identitas (KTP , SIM)" th:value="${nasabah.tipeIdentitas}" name="tipeIdentitas">
+        <br>
+
+        <input type="email" placeholder="Email" th:value="${nasabah.email}" name="email">
+        <br>
+
+        <input type="number" placeholder="no telepon" th:value="${nasabah.noContact}" name="noContact">
+        <br>
+
+        <input type="text" placeholder="No rekening" th:value="${rekening.noRek}" name="noRek">
+        <br>
+
+        <input type="text" placeholder="Bank" th:value="${provider.namaBank}" name="namaBank">
+        <br>
+
+        <button type="submit">Tambah</button>
+      </form>
+    </section>
+
+  </div>
+
+</body>
+</html>

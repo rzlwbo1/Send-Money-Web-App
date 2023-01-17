@@ -27,7 +27,7 @@ public class Nasabah{
     private String fullName;
     private LocalDate dob;
     private String noIdentitas;
-    private String tipeIdentias;
+    private String tipeIdentitas;
     private String email;
     private String noContact;
 
@@ -68,12 +68,12 @@ public class Nasabah{
         this.noIdentitas = noIdentitas;
     }
 
-    public String getTipeIdentias() {
-        return tipeIdentias;
+    public String getTipeIdentitas() {
+        return tipeIdentitas;
     }
 
-    public void setTipeIdentias(String tipeIdentias) {
-        this.tipeIdentias = tipeIdentias;
+    public void setTipeIdentitas(String tipeIdentitas) {
+        this.tipeIdentitas = tipeIdentitas;
     }
 
     public String getEmail() {
@@ -107,7 +107,7 @@ public class Nasabah{
                 ", fullName='" + fullName + '\'' +
                 ", dob=" + dob +
                 ", noIdentitas='" + noIdentitas + '\'' +
-                ", tipeIdentias='" + tipeIdentias + '\'' +
+                ", tipeIdentias='" + tipeIdentitas + '\'' +
                 ", email='" + email + '\'' +
                 ", noContact='" + noContact + '\'' +
                 '}';

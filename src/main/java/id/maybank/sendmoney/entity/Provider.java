@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
 @Entity
 public class Provider {
 
@@ -17,9 +19,8 @@ public class Provider {
     @Column(unique = true)
     private String namaBank;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rekening_id")
-    private Rekening rekening;
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Rekening> rekenings;
 
     public Long getId() {
         return id;
@@ -29,27 +30,27 @@ public class Provider {
         this.id = id;
     }
 
-    public String getBank() {
+    public String getNamaBank() {
         return namaBank;
     }
 
-    public void setBank(String namaBank) {
+    public void setNamaBank(String namaBank) {
         this.namaBank = namaBank;
     }
 
-    public Rekening getRekening() {
-        return rekening;
+    public List<Rekening> getRekenings() {
+        return rekenings;
     }
 
-    public void setRekening(Rekening rekening) {
-        this.rekening = rekening;
+    public void setRekenings(List<Rekening> rekenings) {
+        this.rekenings = rekenings;
     }
 
     @Override
     public String toString() {
         return "Provider{" +
                 "namaBank='" + namaBank + '\'' +
-                ", rekening=" + rekening +
+                ", rekenings=" + rekenings +
                 '}';
     }
 }
