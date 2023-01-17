@@ -15,9 +15,10 @@ public class Provider {
     @NotNull
     @NotBlank
     @Column(unique = true)
-    private String bank;
+    private String namaBank;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rekening_id")
     private Rekening rekening;
 
     public Long getId() {
@@ -29,11 +30,11 @@ public class Provider {
     }
 
     public String getBank() {
-        return bank;
+        return namaBank;
     }
 
-    public void setBank(String bank) {
-        this.bank = bank;
+    public void setBank(String namaBank) {
+        this.namaBank = namaBank;
     }
 
     public Rekening getRekening() {
@@ -47,7 +48,8 @@ public class Provider {
     @Override
     public String toString() {
         return "Provider{" +
-                "bank='" + bank + '\'' +
+                "namaBank='" + namaBank + '\'' +
+                ", rekening=" + rekening +
                 '}';
     }
 }

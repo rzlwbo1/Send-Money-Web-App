@@ -18,6 +18,9 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
+    //// Relasi ke provider ///
+    @OneToMany(mappedBy = "rekening", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Provider> providers;
 
     //// Relasi ke nasabah ////
     @ManyToOne(fetch = FetchType.LAZY)

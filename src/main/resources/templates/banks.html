@@ -11,8 +11,8 @@
 
     <section id="add-bank">
       <form method="post"  th:action="@{/bank/save}" th:object="${bankForm}">
-        <input type="text" placeholder="Nama Bank" th:field="*{bank}">
-        <p class="help is-danger" th:if="${#fields.hasErrors('bank')}" th:errors="*{bank}"></p>
+        <input type="text" placeholder="Nama Bank" th:field="*{namaBank}">
+        <p class="help is-danger" th:if="${#fields.hasErrors('namaBank')}" th:errors="*{namaBank}"></p>
         <br>
         <button type="submit">Tambah</button>
       </form>
