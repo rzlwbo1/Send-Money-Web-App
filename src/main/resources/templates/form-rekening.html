@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Rekening</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+
+  <section class="hero is-warning is-align-items-flex-start is-flex-direction-row">
+    <div class="hero-body container pl-0">
+      <p class="title">
+        Pendaftaran Rekening Nasabah
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <section id="add-nasabah" class="columns mt-5 mb-5">
+      <form method="post"  th:action="@{/rekening/save}" class="column is-7">
+
+        <div class="field">
+          <label class="label">Nama Lengkap</label>
+          <div class="control">
+            <input type="text" class="input" placeholder="Nama lengkap" th:field="${nasabah.fullName}" name="fullName"
+                   autocomplete="on" autofocus>
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+        <div class="field" style="width: 40%">
+          <label class="label">Tanggal Lahir</label>
+          <div class="control">
+            <input type="date" class="input" placeholder="Tanggal lahir" th:field="${nasabah.dob}" name="dob">
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+        <div class="field">
+          <label class="label">No Identitas</label>
+          <div class="control">
+            <input type="text" class="input" placeholder="No Identitas" th:field="${nasabah.noIdentitas}" name="noIdentitas">
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+        <div class="field">
+          <label class="label">Tipe Identitas</label>
+          <div class="control">
+            <input type="text" class="input" placeholder="Tipe Identitas (KTP , SIM)" th:field="${nasabah.tipeIdentitas}" name="tipeIdentitas">
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input type="email" class="input" placeholder="Email" th:field="${nasabah.email}" name="email">
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+        <div class="field">
+          <label class="label">No Telepon</label>
+          <div class="control">
+            <input type="number" class="input" placeholder="no telepon" th:field="${nasabah.noContact}" name="noContact">
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+
+        <div class="field">
+          <label class="label">No Rekening</label>
+          <div class="control">
+            <input type="text" class="input" placeholder="No rekening" th:field="${rekening.noRek}" name="noRek">
+          </div>
+          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+        </div>
+
+        <div class="field mb-6">
+          <label class="label">Pilih Bank</label>
+          <div class="select is-fullwidth">
+            <select name="provider">
+              <option th:if="${providers.size == 0}" th:text="Kosong"></option>
+              <option th:each="provider : ${providers}" th:field="${provider.id}" th:value="${provider.id}"
+                      th:text="${provider.namaBank}"></option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="button is-success is-fullwidth has-text-weight-bold mb-5">Tambah Nasabah</button>
+      </form>
+    </section>
+  </div>
+
+</body>
+</html>

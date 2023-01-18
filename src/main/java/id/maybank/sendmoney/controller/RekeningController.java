@@ -33,6 +33,17 @@ public class RekeningController {
     @GetMapping
     public String index(Model model) {
 
+        // list data;
+        List<Rekening> rekeningList = this.rekeningService.getAllRek();
+//        System.out.println(rekeningList.get(0).getNasabah().getFullName());
+
+        model.addAttribute("rekeningsList", rekeningList);
+        return "rekening";
+    }
+
+    @GetMapping("/form-rekening")
+    public String formRek(Model model) {
+
         /// untuk form
         model.addAttribute("nasabah" , new Nasabah());
         model.addAttribute("rekening", new Rekening());
@@ -41,13 +52,7 @@ public class RekeningController {
         List<Provider> providerList = this.providerService.getAllBank();
         model.addAttribute("providers", providerList);
 
-
-        // list data;
-        List<Rekening> rekeningList = this.rekeningService.getAllRek();
-//        System.out.println(rekeningList.get(0).getNasabah().getFullName());
-
-        model.addAttribute("rekeningsList", rekeningList);
-        return "rekening";
+        return "form-rekening";
     }
 
     @PostMapping("/save")
@@ -70,12 +75,6 @@ public class RekeningController {
         rekening.setNasabah(nasabah);
         rekening.setProvider(provider);
         this.rekeningService.saveRekeing(rekening);
-
-//        this.nasabahRepo.save(nasabah);
-//        rekening.setNasabah(nasabah);
-//        this.rekeningRepo.save(rekening);
-
-        System.out.println(nasabah);
 
         return "redirect:/rekening";
     }
