@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Transfer Dana</title>
+</head>
+<body>
+
+  <h2>Transfer Dana</h2>
+
+  <form th:action="@{/transfer/send}" method="post">
+
+    <label>No rek Pengirim</label>
+    <br>
+    <select name="rekening">
+      <option th:each="rekening: ${rekenings}"
+              th:field="${rekening.id}"
+              th:value="${rekening.id}"
+              th:text="${rekening.noRek}"></option>
+    </select>
+
+    <br>
+
+    <select name="rekening">
+      <option th:each="rekening: ${rekenings}"
+              th:field="${rekening.id}"
+              th:value="${rekening.id}"
+              th:text="${rekening.noRek}"></option>
+    </select>
+
+<!--    <input type="text" th:value="${rekening1.noRek}" name="noRek">-->
+<!--    <br>-->
+
+<!--    <label>No rek Penerima</label>-->
+<!--    <br>-->
+<!--    <input type="text" th:value="${rekening2.noRek}" name="noRek">-->
+    <br>
+    <input type="number" placeholder="Jumlah nominal" th:field="${transfer.amount}" name="amount">
+    <br>
+    <button type="submit">Transfer</button>
+    <br>
+  </form>
+
+</body>
+</html>

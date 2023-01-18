@@ -30,6 +30,10 @@ public class Rekening {
 //    @JoinColumn(name = "nasabah_id")
     private Nasabah nasabah;
 
+    //// Relasi ke Transfer ///
+    @OneToMany(mappedBy = "noRekening", fetch = FetchType.LAZY)
+    private List<TransferAmount> transferAmounts;
+
     public Long getId() {
         return id;
     }
@@ -68,6 +72,14 @@ public class Rekening {
 
     public void setProvider(Provider provider) {
         this.provider = provider;
+    }
+
+    public List<TransferAmount> getTransferAmounts() {
+        return transferAmounts;
+    }
+
+    public void setTransferAmounts(List<TransferAmount> transferAmounts) {
+        this.transferAmounts = transferAmounts;
     }
 
 }

@@ -1,8 +1,10 @@
 package id.maybank.sendmoney;
 
 import id.maybank.sendmoney.entity.Nasabah;
+import id.maybank.sendmoney.entity.Provider;
 import id.maybank.sendmoney.entity.Rekening;
 import id.maybank.sendmoney.repository.NasabahRepo;
+import id.maybank.sendmoney.service.provider.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +24,7 @@ public class SendmoneyApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private NasabahRepo nasabahRepo;
+	private ProviderService providerService;
 	@Override
 	public void run(String... args) throws Exception {
 //		LocalDate date = LocalDate.now();
@@ -53,6 +55,10 @@ public class SendmoneyApplication implements CommandLineRunner {
 //
 //		this.nasabahRepo.save(nasabah);
 //		System.out.println(rekening1.getNasabah().getFullName()) ;
+
+//		Provider prov = new Provider();
+//		prov.setNamaBank("Maybank");
+//		this.providerService.savebank(prov);
 
 	}
 }

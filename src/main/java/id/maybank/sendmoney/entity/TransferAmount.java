@@ -1,8 +1,11 @@
 package id.maybank.sendmoney.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -13,11 +16,14 @@ public class TransferAmount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
-    private Date sendDate;
+    private LocalDateTime sendDate;
+    @NotNull
     private Double amount;
-    private Double fee;
+    private Double fee = 0.0;
 
-
+//    @NotNull
+    @ManyToOne
+    private Rekening noRekening;
 
     public Long getId() {
         return id;
@@ -27,12 +33,20 @@ public class TransferAmount {
         this.id = id;
     }
 
-    public Date getSendDate() {
+    public LocalDateTime getSendDate() {
         return sendDate;
     }
 
-    public void setSendDate(Date sendDate) {
+    public void setSendDate(LocalDateTime sendDate) {
         this.sendDate = sendDate;
+    }
+
+    public Rekening getNoRekening() {
+        return noRekening;
+    }
+
+    public void setNoRekening(Rekening noRekening) {
+        this.noRekening = noRekening;
     }
 
     public Double getAmount() {
