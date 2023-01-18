@@ -33,6 +33,7 @@ public class AdminController {
 
         model.addAttribute("bankForm", new Provider());
         model.addAttribute("banks", providers);
+        System.out.println(providers);
         return "banks";
     }
 

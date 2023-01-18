@@ -3,31 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>List Bank</title>
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 <body>
 
-  <div class="container">
-    <h2>List and add bank</h2>
+  <section class="hero is-warning is-align-items-flex-start is-flex-direction-row">
+    <div class="hero-body container pl-0">
+      <p class="title">
+       Daftar Bank Provider
+      </p>
+    </div>
+  </section>
 
-    <section id="add-bank">
-      <form method="post"  th:action="@{/bank/save}" th:object="${bankForm}">
-        <input type="text" placeholder="Nama Bank" th:field="*{namaBank}">
-        <p class="help is-danger" th:if="${#fields.hasErrors('namaBank')}" th:errors="*{namaBank}"></p>
-        <br>
-        <button type="submit">Tambah</button>
+  <div class="container">
+    <section id="add-bank" class="mt-5 columns">
+      <form method="post"  th:action="@{/bank/save}" th:object="${bankForm}" class="column is-5">
+        <div class="field">
+          <label class="label">Nama Bank</label>
+          <div class="control">
+            <input type="text" placeholder="Nama Bank" th:field="*{namaBank}" class="input" autocomplete="on" autofocus>
+          </div>
+          <p class="help is-danger" th:if="${#fields.hasErrors('namaBank')}" th:errors="*{namaBank}"></p>
+        </div>
+        <button type="submit" class="button is-link has-text-weight-bold">Tambah</button>
       </form>
     </section>
 
 
-    <section id="list-bank">
-      <table border="1">
-        <tr>
-          <td>Nama Bank</td>
-        </tr>
-        <tr th:each="bank : ${banks}">
-          <td th:text="${bank.namaBank}"></td>
-        </tr>
-      </table>
+    <section id="list-bank" class="columns">
+      <div class="table-bank column is-7">
+        <table class="table is-bordered is-striped is-fullwidth">
+          <tr>
+            <th>Nama Bank</th>
+          </tr>
+
+          <tr th:if="${banks.size() == 0}">
+            <td>Belum ada bank</td>
+          </tr>
+
+          <tr th:each="bank : ${banks}">
+            <td th:text="${bank.namaBank}"></td>
+          </tr>
+        </table>
+      </div>
     </section>
 
   </div>

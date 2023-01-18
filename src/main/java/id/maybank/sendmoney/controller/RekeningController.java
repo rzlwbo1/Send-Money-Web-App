@@ -59,11 +59,6 @@ public class RekeningController {
             return "rekening";
         }
 
-//        System.out.println(nasabah.toString());
-//        System.out.println(rekening.toString());
-//        System.out.println(provider.toString());
-
-
 //        this.nasabahRepo.save(nasabah);
 //        rekening.setNasabah(nasabah);
 //        rekening.setProvider(provider);
