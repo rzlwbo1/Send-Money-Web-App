@@ -33,6 +33,8 @@ public class TransferController {
         model.addAttribute("rekenings", rekeningList1);
         model.addAttribute("transfer", new TransferAmount());
         model.addAttribute("rekening", new Rekening());
+        model.addAttribute("rekening2", new Rekening());
+
 
         return "transfer";
     }
@@ -40,6 +42,7 @@ public class TransferController {
     @PostMapping("/send")
     public String sendDana(@ModelAttribute("transfer") TransferAmount transfer,
                            @ModelAttribute("rekening") Rekening rekening,
+                           @ModelAttribute("rekening2") Rekening rekening2,
                            BindingResult result,
                            Model model) {
 
@@ -53,6 +56,7 @@ public class TransferController {
 //        }
 
         System.out.println(rekening.getNoRek());
+        System.out.println(rekening2.getNoRek());
         System.out.println(transfer.getAmount());
 
         LocalDateTime dateTime = LocalDateTime.now();
