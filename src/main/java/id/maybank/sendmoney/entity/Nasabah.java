@@ -33,7 +33,7 @@ public class Nasabah{
 
 
     //// Relasi ke rekening ////
-    @OneToMany(mappedBy = "nasabah", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nasabah", fetch = FetchType.LAZY)
     private List<Rekening> rekenings;
 
     public Long getId() {
@@ -100,16 +100,4 @@ public class Nasabah{
         this.rekenings = rekenings;
     }
 
-    @Override
-    public String toString() {
-        return "Nasabah{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", dob=" + dob +
-                ", noIdentitas='" + noIdentitas + '\'' +
-                ", tipeIdentias='" + tipeIdentitas + '\'' +
-                ", email='" + email + '\'' +
-                ", noContact='" + noContact + '\'' +
-                '}';
-    }
 }

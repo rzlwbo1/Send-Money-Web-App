@@ -19,7 +19,7 @@ public class Provider {
     @Column(unique = true)
     private String namaBank;
 
-    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)
     private List<Rekening> rekenings;
 
     public Long getId() {
@@ -46,11 +46,4 @@ public class Provider {
         this.rekenings = rekenings;
     }
 
-    @Override
-    public String toString() {
-        return "Provider{" +
-                "namaBank='" + namaBank + '\'' +
-                ", rekenings=" + rekenings +
-                '}';
-    }
 }

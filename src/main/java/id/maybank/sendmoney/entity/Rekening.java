@@ -21,13 +21,13 @@ public class Rekening {
     private Double saldo = 700000.0;
 
     //// Relasi ke provider ///
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "provider_id")
+    @ManyToOne
+//    @JoinColumn(name = "provider_id")
     private Provider provider;
 
     //// Relasi ke nasabah ////
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nasabah_id")
+    @ManyToOne
+//    @JoinColumn(name = "nasabah_id")
     private Nasabah nasabah;
 
     public Long getId() {
@@ -70,13 +70,4 @@ public class Rekening {
         this.provider = provider;
     }
 
-    @Override
-    public String toString() {
-        return "Rekening{" +
-                "noRek='" + noRek + '\'' +
-                ", saldo=" + saldo +
-                ", provider=" + provider +
-                ", nasabah=" + nasabah +
-                '}';
-    }
 }

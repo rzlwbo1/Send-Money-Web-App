@@ -3,9 +3,9 @@ package id.maybank.sendmoney.controller;
 import id.maybank.sendmoney.entity.Nasabah;
 import id.maybank.sendmoney.entity.Provider;
 import id.maybank.sendmoney.entity.Rekening;
-import id.maybank.sendmoney.repository.NasabahRepo;
-import id.maybank.sendmoney.repository.RekeningRepo;
+import id.maybank.sendmoney.service.nasabah.NasabahService;
 import id.maybank.sendmoney.service.provider.ProviderService;
+import id.maybank.sendmoney.service.rekening.RekeningService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +24,16 @@ import java.util.List;
 public class RekeningController {
 
     @Autowired
-    private NasabahRepo nasabahRepo;
+    private NasabahService nasabahService;
     @Autowired
-    private RekeningRepo rekeningRepo;
+    private RekeningService rekeningService;
     @Autowired
     private ProviderService providerService;
 
     @GetMapping
     public String index(Model model) {
 
+        /// untuk form
         model.addAttribute("nasabah" , new Nasabah());
         model.addAttribute("rekening", new Rekening());
         model.addAttribute("provider", new Provider());
@@ -40,6 +41,12 @@ public class RekeningController {
         List<Provider> providerList = this.providerService.getAllBank();
         model.addAttribute("providers", providerList);
 
+
+        // list data;
+        List<Rekening> rekeningList = this.rekeningService.getAllRek();
+//        System.out.println(rekeningList.get(0).getNasabah().getFullName());
+
+        model.addAttribute("rekeningsList", rekeningList);
         return "rekening";
     }
 
@@ -59,19 +66,16 @@ public class RekeningController {
             return "rekening";
         }
 
+        this.nasabahService.saveNasabah(nasabah);
+        rekening.setNasabah(nasabah);
+        rekening.setProvider(provider);
+        this.rekeningService.saveRekeing(rekening);
+
 //        this.nasabahRepo.save(nasabah);
 //        rekening.setNasabah(nasabah);
-//        rekening.setProvider(provider);
 //        this.rekeningRepo.save(rekening);
 
-//        List<Rekening> rekenings = new ArrayList<>();
-//        rekenings.add(rekening);
-//
-//        nasabah.setRekenings(rekenings);
-//        rekening.setNasabah(nasabah);
-        this.nasabahRepo.save(nasabah);
-        rekening.setNasabah(nasabah);
-        this.rekeningRepo.save(rekening);
+        System.out.println(nasabah);
 
         return "redirect:/rekening";
     }

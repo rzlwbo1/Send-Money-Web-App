@@ -97,8 +97,8 @@
 
 
     <section id="list-nasabah">
-      <div class="table-bank column is-9">
-        <table class="table is-bordered is-striped is-fullwidth">
+      <div class="table-bank column is-11">
+        <table class="table is-bordered is-striped is-fullwidth is-narrow">
           <tr>
             <th>Nama Nasabah</th>
             <th>No Identitas</th>
@@ -107,6 +107,25 @@
             <th>Contact</th>
             <th>Bank</th>
             <th>No Rekening</th>
+            <th>Aksi</th>
+          </tr>
+
+          <tr th:if="${rekeningsList.size == 0}" >
+            <td colspan="8" class="has-text-centered">Belum ada data</td>
+          </tr>
+
+          <tr th:if="${rekeningsList.size > 0}" th:each="rek : ${rekeningsList}">
+            <td th:text="${rek.nasabah.fullName}"></td>
+            <td th:text="${rek.nasabah.noIdentitas}"></td>
+            <td th:text="${rek.nasabah.tipeIdentitas}"></td>
+            <td th:text="${rek.nasabah.email}"></td>
+            <td th:text="${rek.nasabah.noContact}"></td>
+            <td th:text="${rek.provider.namaBank}"></td>
+            <td th:text="${rek.noRek}"></td>
+            <td>
+              <button class="button is-danger" th:onclick="deleteData('[[${rek.id}]]')">delete</button>
+              <a class="button is-warning" th:href="@{'/rekening/edit?id='+${rek.id}}">Edit</a>
+            </td>
           </tr>
 
         </table>
