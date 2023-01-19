@@ -56,9 +56,9 @@ public class SendmoneyApplication implements CommandLineRunner {
 //		this.nasabahRepo.save(nasabah);
 //		System.out.println(rekening1.getNasabah().getFullName()) ;
 
-//		Provider prov = new Provider();
-//		prov.setNamaBank("Maybank");
-//		this.providerService.savebank(prov);
+		Provider prov = new Provider();
+		prov.setNamaBank("Maybank");
+		this.providerService.savebank(prov);
 
 	}
 }
