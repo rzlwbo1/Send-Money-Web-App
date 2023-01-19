@@ -33,16 +33,19 @@ public class MyAuth {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.authorizeRequests().antMatchers("/employee").hasAnyAuthority("Regular");
-//        httpSecurity.authorizeRequests().antMatchers("/car").hasAnyAuthority("Admin");
-//        httpSecurity.csrf().disable();
-//        httpSecurity.authorizeRequests().antMatchers("/api/**").authenticated().and().httpBasic();
-//        httpSecurity.authorizeRequests().anyRequest().authenticated();
-//        httpSecurity.authorizeRequests().and().formLogin();
-//
-//        return httpSecurity.build();
-//    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+
+        httpSecurity.authorizeHttpRequests().requestMatchers("/bank").hasAnyAuthority("ADMIN", "SUPER");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/rekening").hasAnyAuthority("CUSTOMER SERVICE", "SUPER");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/rekening/*").hasAnyAuthority("CUSTOMER SERVICE", "SUPER");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/transfer").hasAnyAuthority("OPERATOR", "SUPER");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/histories").hasAnyAuthority("OPERATOR", "SUPER");
+
+        httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
+        httpSecurity.authorizeHttpRequests().and().formLogin();
+
+        return httpSecurity.build();
+    }
 
 }
