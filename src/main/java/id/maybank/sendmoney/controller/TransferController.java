@@ -48,51 +48,84 @@ public class TransferController {
                            RedirectAttributes attributes,
                            Model model) {
 
-//        if (result.hasErrors()) {
-//            List<Rekening> rekeningList = this.rekeningService.getAllRek();
-//            model.addAttribute("rekeningPengirim", rekeningList);
-//            model.addAttribute("rekeningPenerima", rekeningList);
-//            model.addAttribute("transfer", transfer);
-//            System.out.println("Error");
-//            return "transfer";
-//        }
+        if (result.hasErrors()) {
+            List<Rekening> rekeningList = this.rekeningService.getAllRek();
+            model.addAttribute("rekeningPengirim", rekeningList);
+            model.addAttribute("rekeningPenerima", rekeningList);
+            model.addAttribute("transfer", transfer);
+            System.out.println("Error");
+            return "transfer";
+        }
 
-//        System.out.println(rekening.getNoRek());
-//        System.out.println(rekening2.getNoRek());
-//        System.out.println(transfer.getAmount());
 
 
         /// proses kirim
         // validasi saldo pengirim stelah transfer tidak boleh < 50.0000
 
-        Rekening takeSaldoPengirim = this.rekeningService.findByNoRek(rekening.getNoRek());
-        Rekening takeSaldoPenerima = this.rekeningService.findByNoRek(rekening2.getNoRek());
+        Rekening rekPengirim = this.rekeningService.findByNoRek(rekening.getNoRek());
+        Rekening rekPenerima = this.rekeningService.findByNoRek(rekening2.getNoRek());
         Double takeAmount = transfer.getAmount();
 
+        // check if beda bank
+        String bankPengirim = rekPengirim.getProvider().getNamaBank();
+        String bankPenerima = rekPenerima.getProvider().getNamaBank();
+
+        System.out.println(bankPengirim);
+        System.out.println(bankPenerima);
+
         // calculate
-        Double saldoPengirim = takeSaldoPengirim.getSaldo();
-        Double saldoPenerima = takeSaldoPenerima.getSaldo();
-
-        Double minusSaldo = saldoPengirim - takeAmount;
-        Double plusSaldo = saldoPenerima + takeAmount;
-
-        // update saldo
-        takeSaldoPengirim.setSaldo(minusSaldo);
-        takeSaldoPenerima.setSaldo(plusSaldo);
-
-        this.rekeningService.saveRekeing(takeSaldoPengirim);
-        this.rekeningService.saveRekeing(takeSaldoPenerima);
+        Double saldoPengirim = rekPengirim.getSaldo();
+        Double saldoPenerima = rekPenerima.getSaldo();
 
 
-        //save ke transfer
-        LocalDateTime dateTime = LocalDateTime.now();
+        if (bankPengirim.equals(bankPenerima)) {
 
-        transfer.setSendDate(dateTime);
-        transfer.setFee(0.0);
-        transfer.setRekPengirim(rekening);
-        transfer.setRekPenerima(rekening2);
+            Double minusSaldo = saldoPengirim - takeAmount;
+            Double plusSaldo = saldoPenerima + takeAmount;
 
-        this.transferRepo.save(transfer);
+            // update saldo
+            rekPengirim.setSaldo(minusSaldo);
+            rekPenerima.setSaldo(plusSaldo);
+
+            this.rekeningService.saveRekeing(rekPengirim);
+            this.rekeningService.saveRekeing(rekPenerima);
+
+            //save ke transfer
+            LocalDateTime dateTime = LocalDateTime.now();
+
+            transfer.setSendDate(dateTime);
+            transfer.setFee(0.0);
+            transfer.setRekPengirim(rekening);
+            transfer.setRekPenerima(rekening2);
+
+            this.transferRepo.save(transfer);
+
+        } else {
+            Double minusSaldo = (saldoPengirim - takeAmount) - 6500.0;
+            Double plusSaldo = saldoPenerima + takeAmount;
+
+            // update saldo
+            rekPengirim.setSaldo(minusSaldo);
+            rekPenerima.setSaldo(plusSaldo);
+
+            this.rekeningService.saveRekeing(rekPengirim);
+            this.rekeningService.saveRekeing(rekPenerima);
+
+            //save ke transfer
+            LocalDateTime dateTime = LocalDateTime.now();
+
+            transfer.setSendDate(dateTime);
+            transfer.setFee(6500.0);
+            transfer.setRekPengirim(rekening);
+            transfer.setRekPenerima(rekening2);
+
+            this.transferRepo.save(transfer);
+        }
+
+
+
+
+
 
         return "redirect:/transfer";
     }

@@ -24,54 +24,54 @@ public class InitDefaultUserAuth {
     private RoleRepo roleRepo;
 
 
-    @PostConstruct
-    public void index() {
-
-        // buat role
-        Role roleAdmin = new Role();
-        roleAdmin.setRole("ADMIN");
-        this.roleRepo.save(roleAdmin);
-
-        Role roleOperator = new Role();
-        roleOperator.setRole("OPERATOR");
-        this.roleRepo.save(roleOperator);
-
-        Role roleCS = new Role();
-        roleCS.setRole("CUSTOMER SERVICE");
-        this.roleRepo.save(roleCS);
-
-
-
-        // buat list role dan usernya
-
-        List<Role> roleListAdmin = new ArrayList<>();
-        roleListAdmin.add(roleAdmin);
-
-        List<Role> roleListOperator = new ArrayList<>();
-        roleListOperator.add(roleOperator);
-
-        List<Role> roleListCS = new ArrayList<>();
-        roleListCS.add(roleCS);
-
-        User userAdmin = new User();
-        userAdmin.setUsername("admin");
-        userAdmin.setPassword(new BCryptPasswordEncoder().encode("123456"));
-        userAdmin.setRoles(roleListAdmin);
-        this.userRepo.save(userAdmin);
-
-        User userOperator = new User();
-        userOperator.setUsername("operator");
-        userOperator.setPassword(new BCryptPasswordEncoder().encode("123456"));
-        userOperator.setRoles(roleListOperator);
-        this.userRepo.save(userOperator);
-
-        User userCS = new User();
-        userCS.setUsername("customer");
-        userCS.setPassword(new BCryptPasswordEncoder().encode("123456"));
-        userCS.setRoles(roleListCS);
-        this.userRepo.save(userCS);
-
-    }
+//    @PostConstruct
+//    public void index() {
+//
+//        // buat role
+//        Role roleAdmin = new Role();
+//        roleAdmin.setRole("ADMIN");
+//        this.roleRepo.save(roleAdmin);
+//
+//        Role roleOperator = new Role();
+//        roleOperator.setRole("OPERATOR");
+//        this.roleRepo.save(roleOperator);
+//
+//        Role roleCS = new Role();
+//        roleCS.setRole("CUSTOMER SERVICE");
+//        this.roleRepo.save(roleCS);
+//
+//
+//
+//        // buat list role dan usernya
+//
+//        List<Role> roleListAdmin = new ArrayList<>();
+//        roleListAdmin.add(roleAdmin);
+//
+//        List<Role> roleListOperator = new ArrayList<>();
+//        roleListOperator.add(roleOperator);
+//
+//        List<Role> roleListCS = new ArrayList<>();
+//        roleListCS.add(roleCS);
+//
+//        User userAdmin = new User();
+//        userAdmin.setUsername("admin");
+//        userAdmin.setPassword(new BCryptPasswordEncoder().encode("123456"));
+//        userAdmin.setRoles(roleListAdmin);
+//        this.userRepo.save(userAdmin);
+//
+//        User userOperator = new User();
+//        userOperator.setUsername("operator");
+//        userOperator.setPassword(new BCryptPasswordEncoder().encode("123456"));
+//        userOperator.setRoles(roleListOperator);
+//        this.userRepo.save(userOperator);
+//
+//        User userCS = new User();
+//        userCS.setUsername("customer");
+//        userCS.setPassword(new BCryptPasswordEncoder().encode("123456"));
+//        userCS.setRoles(roleListCS);
+//        this.userRepo.save(userCS);
+//
+//    }
 
 
 }

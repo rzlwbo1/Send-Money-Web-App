@@ -18,7 +18,7 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
-    private Double saldo = 7000000.0;
+    private Double saldo = 5000000.0;
 
     //// Relasi ke provider ///
     @ManyToOne
