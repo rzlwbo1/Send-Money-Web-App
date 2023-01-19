@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,6 +45,7 @@ public class TransferController {
                            @ModelAttribute("rekening") Rekening rekening,
                            @ModelAttribute("rekening2") Rekening rekening2,
                            BindingResult result,
+                           RedirectAttributes attributes,
                            Model model) {
 
 //        if (result.hasErrors()) {
@@ -55,12 +57,42 @@ public class TransferController {
 //            return "transfer";
 //        }
 
-        System.out.println(rekening.getNoRek());
-        System.out.println(rekening2.getNoRek());
-        System.out.println(transfer.getAmount());
+//        System.out.println(rekening.getNoRek());
+//        System.out.println(rekening2.getNoRek());
+//        System.out.println(transfer.getAmount());
 
+
+        /// proses kirim
+        // validasi saldo pengirim stelah transfer tidak boleh < 50.0000
+
+        Rekening takeSaldoPengirim = this.rekeningService.findByNoRek(rekening.getNoRek());
+        Rekening takeSaldoPenerima = this.rekeningService.findByNoRek(rekening2.getNoRek());
+        Double takeAmount = transfer.getAmount();
+
+        // calculate
+        Double saldoPengirim = takeSaldoPengirim.getSaldo();
+        Double saldoPenerima = takeSaldoPenerima.getSaldo();
+
+        Double minusSaldo = saldoPengirim - takeAmount;
+        Double plusSaldo = saldoPenerima + takeAmount;
+
+        // update saldo
+        takeSaldoPengirim.setSaldo(minusSaldo);
+        takeSaldoPenerima.setSaldo(plusSaldo);
+
+        this.rekeningService.saveRekeing(takeSaldoPengirim);
+        this.rekeningService.saveRekeing(takeSaldoPenerima);
+
+
+        //save ke transfer
         LocalDateTime dateTime = LocalDateTime.now();
 
+        transfer.setSendDate(dateTime);
+        transfer.setFee(0.0);
+        transfer.setRekPengirim(rekening);
+        transfer.setRekPenerima(rekening2);
+
+        this.transferRepo.save(transfer);
 
         return "redirect:/transfer";
     }

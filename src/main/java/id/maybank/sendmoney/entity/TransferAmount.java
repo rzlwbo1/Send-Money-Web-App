@@ -21,9 +21,13 @@ public class TransferAmount {
     private Double amount;
     private Double fee = 0.0;
 
-//    @NotNull
-    @ManyToOne
-    private Rekening noRekening;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pengirim_id", referencedColumnName = "id")
+    private Rekening rekPengirim;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "penerima_id", referencedColumnName = "id")
+    private Rekening rekPenerima;
 
     public Long getId() {
         return id;
@@ -41,12 +45,20 @@ public class TransferAmount {
         this.sendDate = sendDate;
     }
 
-    public Rekening getNoRekening() {
-        return noRekening;
+    public Rekening getRekPengirim() {
+        return rekPengirim;
     }
 
-    public void setNoRekening(Rekening noRekening) {
-        this.noRekening = noRekening;
+    public void setRekPengirim(Rekening rekPengirim) {
+        this.rekPengirim = rekPengirim;
+    }
+
+    public Rekening getRekPenerima() {
+        return rekPenerima;
+    }
+
+    public void setRekPenerima(Rekening rekPenerima) {
+        this.rekPenerima = rekPenerima;
     }
 
     public Double getAmount() {

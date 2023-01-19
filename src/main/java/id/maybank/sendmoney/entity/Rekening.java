@@ -18,7 +18,7 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
-    private Double saldo = 700000.0;
+    private Double saldo = 7000000.0;
 
     //// Relasi ke provider ///
     @ManyToOne
@@ -31,8 +31,13 @@ public class Rekening {
     private Nasabah nasabah;
 
     //// Relasi ke Transfer ///
-    @OneToMany(mappedBy = "noRekening", fetch = FetchType.LAZY)
-    private List<TransferAmount> transferAmounts;
+    @OneToMany(mappedBy = "rekPengirim", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<TransferAmount> transferAmountsPengirim;
+
+    @OneToMany(mappedBy = "rekPenerima", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<TransferAmount> transferAmountsPenerima;
+
+
 
     public Long getId() {
         return id;
@@ -74,12 +79,19 @@ public class Rekening {
         this.provider = provider;
     }
 
-    public List<TransferAmount> getTransferAmounts() {
-        return transferAmounts;
+    public List<TransferAmount> getTransferAmountsPengirim() {
+        return transferAmountsPengirim;
     }
 
-    public void setTransferAmounts(List<TransferAmount> transferAmounts) {
-        this.transferAmounts = transferAmounts;
+    public void setTransferAmountsPengirim(List<TransferAmount> transferAmountsPengirim) {
+        this.transferAmountsPengirim = transferAmountsPengirim;
     }
 
+    public List<TransferAmount> getTransferAmountsPenerima() {
+        return transferAmountsPenerima;
+    }
+
+    public void setTransferAmountsPenerima(List<TransferAmount> transferAmountsPenerima) {
+        this.transferAmountsPenerima = transferAmountsPenerima;
+    }
 }
