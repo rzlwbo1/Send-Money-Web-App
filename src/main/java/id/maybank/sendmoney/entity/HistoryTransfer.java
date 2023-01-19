@@ -2,18 +2,19 @@ package id.maybank.sendmoney.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "history")
 public class HistoryTransfer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String rekPenerima;
     private String rekPengirim;
-    private Date sendDate;
+    private LocalDateTime sendDate;
+    private Double amountTransfer;
 
     public Long getId() {
         return id;
@@ -39,11 +40,19 @@ public class HistoryTransfer {
         this.rekPengirim = rekPengirim;
     }
 
-    public Date getSendDate() {
+    public LocalDateTime getSendDate() {
         return sendDate;
     }
 
-    public void setSendDate(Date sendDate) {
+    public void setSendDate(LocalDateTime sendDate) {
         this.sendDate = sendDate;
+    }
+
+    public Double getAmountTransfer() {
+        return amountTransfer;
+    }
+
+    public void setAmountTransfer(Double amountTransfer) {
+        this.amountTransfer = amountTransfer;
     }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--  <link rel="stylesheet" th:href="@{/styles/style.css}">-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <title>Histories</title>
+</head>
+<body>
+
+  <section class="hero is-warning is-align-items-flex-start is-flex-direction-row">
+    <div class="hero-body container pl-0">
+      <p class="title">
+        History Transfer Nasabah
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+
+      <section id="list-histories" class="mt-5">
+        <div class="table-histories column is-11">
+          <table class="table is-bordered is-striped is-fullwidth is-narrow">
+            <tr>
+              <th>No Rek Pengirim</th>
+              <th>No Rek Penerima</th>
+              <th>Waktu Kirim</th>
+              <th>Jumlah Transfer</th>
+            </tr>
+
+            <tr th:each="hist : ${histories}">
+              <td th:text="${hist.rekPengirim}"></td>
+              <td th:text="${hist.rekPenerima}"></td>
+              <td th:text="${#temporals.format(hist.sendDate, 'dd-MMM-yyyy HH:mm:ss')}"></td>
+              <td th:text="${hist.amountTransfer}"></td>
+            </tr>
+
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

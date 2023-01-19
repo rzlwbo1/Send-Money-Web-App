@@ -1,12 +1,13 @@
 package id.maybank.sendmoney.controller;
 
+import id.maybank.sendmoney.entity.HistoryTransfer;
 import id.maybank.sendmoney.entity.Rekening;
 import id.maybank.sendmoney.entity.TransferAmount;
 import id.maybank.sendmoney.repository.TransferRepo;
+import id.maybank.sendmoney.service.history.HistoryService;
 import id.maybank.sendmoney.service.rekening.RekeningService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,8 @@ public class TransferController {
     private RekeningService rekeningService;
     @Autowired
     private TransferRepo transferRepo;
+    @Autowired
+    private HistoryService historyService;
 
     @GetMapping
     public String index(Model model) {
@@ -145,6 +148,18 @@ public class TransferController {
             }
 
         }
+
+
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        HistoryTransfer historyTransfer = new HistoryTransfer();
+        historyTransfer.setRekPengirim(rekPengirim.getNoRek());
+        historyTransfer.setRekPenerima(rekPenerima.getNoRek());
+        historyTransfer.setSendDate(dateTime);
+        historyTransfer.setAmountTransfer(transfer.getAmount());
+
+        this.historyService.saveHistory(historyTransfer);
+
         return "redirect:/transfer";
     }
 
