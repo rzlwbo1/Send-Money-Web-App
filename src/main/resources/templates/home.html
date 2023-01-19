@@ -1,20 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <title>Title</title>
 </head>
-<body>
+<body class="px-3 py-3">
 
-    <h2>Home page</h2>
-
-    <div>
-        <a th:href="@{/bank}">Ke bank</a>
-        <br>
-        <a th:href="@{/rekening}">Ke list rekening</a>
-        <br>
-        <a th:href="@{/rekening/form-rekening}">Ke form rekening</a>
+  <section class="hero is-warning" style="border-radius: 10px;">
+    <div class="hero-body">
+      <h1 class="title is-1 has-text-centered" style="letter-spacing: 1px;">
+        SendMoney
+      </h1>
+      <p class="subtitle is-5 has-text-centered">
+        Kirim Uang Tanpa Batas
+      </p>
     </div>
+  </section>
+
+
+  <div class="menus-utama mt-6">
+    <div class="container">
+      <div class="menus columns">
+        <div class="menu-item column is-3">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <a th:href="@{/bank}" class="has-text-weight-bold">Bank Provider</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item column is-3">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <a th:href="@{/rekening}" class="has-text-weight-bold">List Rekening</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item column is-3">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <a th:href="@{/transfer}" class="has-text-weight-bold">Transfer Dana</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item column is-3">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <a th:href="@{/histories}" class="has-text-weight-bold">History Transfer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
