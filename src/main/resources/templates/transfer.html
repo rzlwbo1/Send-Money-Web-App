@@ -1,45 +1,77 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" class="has-background-light">
 <head>
   <meta charset="UTF-8">
   <title>Transfer Dana</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<!--  <link rel="stylesheet" th:href="@{/styles/style.css}">-->
 </head>
 <body>
 
-  <h2>Transfer Dana</h2>
+  <div th:if="${message}" class="notification is-success is-light">
+    <button class="delete"></button>
+    <p th:text="${message}"></p>
+  </div>
 
-  <form th:action="@{/transfer/send}" method="post">
+  <div th:if="${failed}" class="notification is-success is-danger">
+    <button class="delete"></button>
+    <p th:text="${failed}"></p>
+  </div>
 
-    <label>No rek Pengirim</label>
-    <br>
-    <select name="rekening">
-      <option th:each="rekening: ${rekenings}"
-              th:field="${rekening.id}"
-              th:value="${rekening.id}"
-              th:text="${rekening.noRek}"></option>
-    </select>
+  <section class="hero is-link is-align-items-flex-start is-flex-direction-row">
+    <div class="hero-body container pl-0">
+      <p class="title">
+        Transfer Dana
+      </p>
+    </div>
+  </section>
 
-    <br>
 
-    <select name="rekening2">
-      <option th:each="rekening2: ${rekenings}"
-              th:field="${rekening2.id}"
-              th:value="${rekening2.id}"
-              th:text="${rekening2.noRek}"></option>
-    </select>
+  <main class="container">
+    <section class="columns is-centered mt-5">
+      <form th:action="@{/transfer/send}" method="post" class="column is-half box">
 
-<!--    <input type="text" th:value="${rekening1.noRek}" name="noRek">-->
-<!--    <br>-->
+        <div class="field">
+          <label class="label">No Rek Pengirim</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="rekening">
+                <option th:each="rekening: ${rekenings}"
+                        th:field="${rekening.id}"
+                        th:value="${rekening.id}"
+                        th:text="${rekening.noRek}"></option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-<!--    <label>No rek Penerima</label>-->
-<!--    <br>-->
-<!--    <input type="text" th:value="${rekening2.noRek}" name="noRek">-->
-    <br>
-    <input type="number" placeholder="Jumlah nominal" th:field="${transfer.amount}" name="amount">
-    <br>
-    <button type="submit">Transfer</button>
-    <br>
-  </form>
+        <div class="field">
+          <label class="label">No Rek Penerima</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="rekening2">
+                <option th:each="rekening2: ${rekenings}"
+                        th:field="${rekening2.id}"
+                        th:value="${rekening2.id}"
+                        th:text="${rekening2.noRek}"></option>
+              </select>
+            </div>
+          </div>
+        </div>
 
+        <div class="field">
+          <label class="label">Jumlah Dana</label>
+          <div class="control">
+            <input type="number" class="input"
+                   placeholder="Jumlah nominal" th:field="${transfer.amount}" name="amount">
+          </div>
+        </div>
+
+        <button type="submit" class="button is-link is-fullwidth mt-5 mb-2 has-text-weight-bold">Transfer</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/scripts/script.js"></script>
 </body>
 </html>

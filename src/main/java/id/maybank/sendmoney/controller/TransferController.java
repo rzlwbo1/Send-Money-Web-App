@@ -87,7 +87,7 @@ public class TransferController {
             // update saldo
 
             if (minusSaldo <= 50000.0) {
-                attributes.addFlashAttribute("message", "Gagal Tansfer");
+                attributes.addFlashAttribute("failed", "Gagal Tansfer");
                 System.out.println("Gagal Transfer");
             } else {
 
@@ -116,7 +116,7 @@ public class TransferController {
             // update saldo
 
             if (minusSaldo <= 50000.0) {
-                attributes.addFlashAttribute("message", "Gagal Tansfer");
+                attributes.addFlashAttribute("failed", "Gagal Tansfer");
                 System.out.println("Gagal Transfer");
             } else {
                 rekPengirim.setSaldo(minusSaldo);
