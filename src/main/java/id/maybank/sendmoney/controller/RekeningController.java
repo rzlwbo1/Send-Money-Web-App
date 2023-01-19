@@ -57,18 +57,22 @@ public class RekeningController {
 
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("nasabah") Nasabah nasabah,
-                       @ModelAttribute("rekening") Rekening rekening,
-                       @ModelAttribute("provider") Provider provider,
                        BindingResult result,
+                       @Valid @ModelAttribute("rekening") Rekening rekening,
+                       BindingResult result2,
+                       @ModelAttribute("provider") Provider provider,
                        Model model) {
 
-        if (result.hasErrors()) {
+        if (result.hasErrors() || result2.hasErrors()) {
 
             model.addAttribute("nasabah" , nasabah);
             model.addAttribute("rekening", rekening);
             model.addAttribute("provider", provider);
 
-            return "rekening";
+            List<Provider> providerList = this.providerService.getAllBank();
+            model.addAttribute("providers", providerList);
+
+            return "form-rekening";
         }
 
         this.nasabahService.saveNasabah(nasabah);

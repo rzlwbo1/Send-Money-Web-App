@@ -17,7 +17,7 @@ public class TransferAmount {
     private Long id;
     @NotNull
     private LocalDateTime sendDate;
-    @NotNull
+    @NotNull(message = "amount must not be null")
     private Double amount;
     private Double fee = 0.0;
 

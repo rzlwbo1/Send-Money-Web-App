@@ -44,7 +44,9 @@ public class AdminController {
                        Model model) {
 
         if (result.hasErrors()) {
+            List<Provider> providers = this.providerService.getAllBank();
             model.addAttribute("bankForm", bankForm);
+            model.addAttribute("banks", providers);
             return "banks";
         }
 

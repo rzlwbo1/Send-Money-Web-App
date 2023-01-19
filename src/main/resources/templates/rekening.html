@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title>Tambah Nasabah</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/styles/style.css}">
+<!--    <link rel="stylesheet" th:href="@{/styles/style.css}">-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -18,6 +22,24 @@
 
 
   <div class="container">
+
+    <div class="mt-4 is-flex is-align-items-flex-start is-justify-content-space-between"
+         style="max-width: 350px">
+      <a th:href="@{/rekening/form-rekening}" class="button is-info">
+        <span class="icon">
+          <i class="fas fa-university"></i>
+        </span>
+        <span>Tambah Nasabah</span>
+      </a>
+
+      <a th:href="@{/transfer}" class="button is-success">
+        <span class="icon">
+          <i class="fas fa-coins"></i>
+        </span>
+        <span>Transfer Dana</span>
+      </a>
+    </div>
+
     <section id="list-nasabah" class="mt-5">
       <div class="table-bank column is-11">
         <table class="table is-bordered is-striped is-fullwidth is-narrow">

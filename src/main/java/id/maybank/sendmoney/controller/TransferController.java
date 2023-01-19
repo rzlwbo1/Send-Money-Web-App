@@ -42,10 +42,10 @@ public class TransferController {
     }
 
     @PostMapping("/send")
-    public String sendDana(@ModelAttribute("transfer") TransferAmount transfer,
+    public String sendDana(@Valid @ModelAttribute("transfer") TransferAmount transfer,
+                           BindingResult result,
                            @ModelAttribute("rekening") Rekening rekening,
                            @ModelAttribute("rekening2") Rekening rekening2,
-                           BindingResult result,
                            RedirectAttributes attributes,
                            Model model) {
 
@@ -57,7 +57,6 @@ public class TransferController {
             System.out.println("Error");
             return "transfer";
         }
-
 
 
         /// proses kirim

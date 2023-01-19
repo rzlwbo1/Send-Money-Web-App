@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Form Rekening</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
             <input type="text" class="input" placeholder="Nama lengkap" th:field="${nasabah.fullName}" name="fullName"
                    autocomplete="on" autofocus>
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>
         </div>
 
         <div class="field" style="width: 40%">
@@ -35,7 +35,7 @@
           <div class="control">
             <input type="date" class="input" placeholder="Tanggal lahir" th:field="${nasabah.dob}" name="dob">
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('nasabah.dob')}" th:errors="*{nasabah.dob}"></p>
         </div>
 
         <div class="field">
@@ -43,15 +43,16 @@
           <div class="control">
             <input type="text" class="input" placeholder="No Identitas" th:field="${nasabah.noIdentitas}" name="noIdentitas">
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('nasabah.noIdentitas')}" th:errors="*{nasabah.noIdentitas}"></p>
         </div>
 
         <div class="field">
           <label class="label">Tipe Identitas</label>
           <div class="control">
-            <input type="text" class="input" placeholder="Tipe Identitas (KTP , SIM)" th:field="${nasabah.tipeIdentitas}" name="tipeIdentitas">
+            <input type="text" class="input" placeholder="Tipe Identitas (KTP , SIM)" th:field="${nasabah.tipeIdentitas}"
+                   name="tipeIdentitas">
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('nasabah.tipeIdentitas')}" th:errors="*{nasabah.tipeIdentitas}"></p>
         </div>
 
         <div class="field">
@@ -59,7 +60,7 @@
           <div class="control">
             <input type="email" class="input" placeholder="Email" th:field="${nasabah.email}" name="email">
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('nasabah.email')}" th:errors="*{nasabah.email}"></p>
         </div>
 
         <div class="field">
@@ -67,7 +68,7 @@
           <div class="control">
             <input type="number" class="input" placeholder="no telepon" th:field="${nasabah.noContact}" name="noContact">
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('nasabah.noContact')}" th:errors="*{nasabah.noContact}"></p>
         </div>
 
 
@@ -76,7 +77,7 @@
           <div class="control">
             <input type="text" class="input" placeholder="No rekening" th:field="${rekening.noRek}" name="noRek">
           </div>
-          <!--<p th:if="${#fields.hasErrors('nasabah.fullName')}" th:errors="*{nasabah.fullName}"></p>-->
+          <p class="help is-danger" th:if="${#fields.hasErrors('rekening.noRek')}" th:errors="*{rekening.noRek}"></p>
         </div>
 
         <div class="field mb-6">

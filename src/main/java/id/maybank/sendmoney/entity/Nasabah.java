@@ -2,10 +2,7 @@ package id.maybank.sendmoney.entity;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,10 +22,24 @@ public class Nasabah{
     @NotEmpty
     @Size(min = 3)
     private String fullName;
+    @NotNull(message = "must not be blank")
     private LocalDate dob;
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private String noIdentitas;
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private String tipeIdentitas;
+    @Email
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private String email;
+    @NotBlank
+    @NotEmpty
+    @NotNull
     private String noContact;
 
 
