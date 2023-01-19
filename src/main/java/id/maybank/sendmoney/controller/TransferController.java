@@ -6,6 +6,7 @@ import id.maybank.sendmoney.repository.TransferRepo;
 import id.maybank.sendmoney.service.rekening.RekeningService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -84,49 +85,59 @@ public class TransferController {
             Double plusSaldo = saldoPenerima + takeAmount;
 
             // update saldo
-            rekPengirim.setSaldo(minusSaldo);
-            rekPenerima.setSaldo(plusSaldo);
 
-            this.rekeningService.saveRekeing(rekPengirim);
-            this.rekeningService.saveRekeing(rekPenerima);
+            if (minusSaldo <= 50000.0) {
+                attributes.addFlashAttribute("message", "Gagal Tansfer");
+                System.out.println("Gagal Transfer");
+            } else {
 
-            //save ke transfer
-            LocalDateTime dateTime = LocalDateTime.now();
+                rekPengirim.setSaldo(minusSaldo);
+                rekPenerima.setSaldo(plusSaldo);
 
-            transfer.setSendDate(dateTime);
-            transfer.setFee(0.0);
-            transfer.setRekPengirim(rekening);
-            transfer.setRekPenerima(rekening2);
+                this.rekeningService.saveRekeing(rekPengirim);
+                this.rekeningService.saveRekeing(rekPenerima);
 
-            this.transferRepo.save(transfer);
+                //save ke transfer
+                LocalDateTime dateTime = LocalDateTime.now();
+
+                transfer.setSendDate(dateTime);
+                transfer.setFee(0.0);
+                transfer.setRekPengirim(rekening);
+                transfer.setRekPenerima(rekening2);
+
+                attributes.addFlashAttribute("message", "Berhasil Transfer");
+                this.transferRepo.save(transfer);
+            }
 
         } else {
             Double minusSaldo = (saldoPengirim - takeAmount) - 6500.0;
             Double plusSaldo = saldoPenerima + takeAmount;
 
             // update saldo
-            rekPengirim.setSaldo(minusSaldo);
-            rekPenerima.setSaldo(plusSaldo);
 
-            this.rekeningService.saveRekeing(rekPengirim);
-            this.rekeningService.saveRekeing(rekPenerima);
+            if (minusSaldo <= 50000.0) {
+                attributes.addFlashAttribute("message", "Gagal Tansfer");
+                System.out.println("Gagal Transfer");
+            } else {
+                rekPengirim.setSaldo(minusSaldo);
+                rekPenerima.setSaldo(plusSaldo);
 
-            //save ke transfer
-            LocalDateTime dateTime = LocalDateTime.now();
+                this.rekeningService.saveRekeing(rekPengirim);
+                this.rekeningService.saveRekeing(rekPenerima);
 
-            transfer.setSendDate(dateTime);
-            transfer.setFee(6500.0);
-            transfer.setRekPengirim(rekening);
-            transfer.setRekPenerima(rekening2);
+                //save ke transfer
+                LocalDateTime dateTime = LocalDateTime.now();
 
-            this.transferRepo.save(transfer);
+                transfer.setSendDate(dateTime);
+                transfer.setFee(6500.0);
+                transfer.setRekPengirim(rekening);
+                transfer.setRekPenerima(rekening2);
+
+                this.transferRepo.save(transfer);
+                attributes.addFlashAttribute("message", "Berhasil Transfer");
+            }
+
         }
-
-
-
-
-
-
         return "redirect:/transfer";
     }
 
