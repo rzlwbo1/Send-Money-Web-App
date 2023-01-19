@@ -15,7 +15,6 @@ public class TransferAmount {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
     private LocalDateTime sendDate;
     @NotNull(message = "amount must not be null")
     private Double amount;

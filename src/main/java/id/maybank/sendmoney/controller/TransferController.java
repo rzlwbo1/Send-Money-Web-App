@@ -38,6 +38,10 @@ public class TransferController {
         model.addAttribute("rekening2", new Rekening());
 
 
+        // list data tf
+        List<TransferAmount> transferList = this.transferRepo.findAll();
+        model.addAttribute("transferList", transferList);
+
         return "transfer";
     }
 
@@ -51,9 +55,13 @@ public class TransferController {
 
         if (result.hasErrors()) {
             List<Rekening> rekeningList = this.rekeningService.getAllRek();
-            model.addAttribute("rekeningPengirim", rekeningList);
-            model.addAttribute("rekeningPenerima", rekeningList);
+            model.addAttribute("rekenings", rekeningList);
+            model.addAttribute("rekening", rekening);
+            model.addAttribute("rekening2", rekening2);
             model.addAttribute("transfer", transfer);
+
+            List<TransferAmount> transferList = this.transferRepo.findAll();
+            model.addAttribute("transferList", transferList);
             System.out.println("Error");
             return "transfer";
         }
@@ -132,8 +140,8 @@ public class TransferController {
                 transfer.setRekPengirim(rekening);
                 transfer.setRekPenerima(rekening2);
 
-                this.transferRepo.save(transfer);
                 attributes.addFlashAttribute("message", "Berhasil Transfer");
+                this.transferRepo.save(transfer);
             }
 
         }

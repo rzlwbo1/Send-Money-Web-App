@@ -21,12 +21,12 @@ public class Rekening {
     private Double saldo = 200000.0;
 
     //// Relasi ke provider ///
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "provider_id")
     private Provider provider;
 
     //// Relasi ke nasabah ////
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "nasabah_id")
     private Nasabah nasabah;
 

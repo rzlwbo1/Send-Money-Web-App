@@ -71,6 +71,33 @@
         <a th:href="@{/transfer}" class="button is-outlined">Refresh</a>
       </form>
     </section>
+
+
+    <section id="list-nasabah" class="mt-5">
+      <div class="table-bank column is-11">
+        <table class="table is-bordered is-striped is-fullwidth is-narrow">
+          <tr>
+            <th>Rekening Pengirim</th>
+            <th>Rekening Penerima</th>
+            <th>Amount</th>
+            <th>Bank Asal</th>
+            <th>Bank Tujuan</th>
+            <th>Biaya Transfer</th>
+          </tr>
+
+          <tr th:each="tf : ${transferList}">
+            <td th:text="${tf.rekPengirim.noRek}"></td>
+            <td th:text="${tf.rekPenerima.noRek}"></td>
+            <td th:text="${tf.amount}"></td>
+            <td th:text="${tf.rekPengirim.provider.namaBank}"></td>
+            <td th:text="${tf.rekPenerima.provider.namaBank}"></td>
+            <td th:text="${tf.fee}"></td>
+          </tr>
+
+        </table>
+      </div>
+    </section>
+
   </main>
 
   <script src="/scripts/script.js"></script>
