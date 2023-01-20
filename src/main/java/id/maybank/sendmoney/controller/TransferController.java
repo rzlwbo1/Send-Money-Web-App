@@ -82,8 +82,6 @@ public class TransferController {
         String bankPengirim = rekPengirim.getProvider().getNamaBank();
         String bankPenerima = rekPenerima.getProvider().getNamaBank();
 
-        System.out.println(bankPengirim);
-        System.out.println(bankPenerima);
 
         // calculate
         Double saldoPengirim = rekPengirim.getSaldo();
@@ -96,7 +94,6 @@ public class TransferController {
             Double plusSaldo = saldoPenerima + takeAmount;
 
             // update saldo
-
             if (minusSaldo <= 50000.0) {
                 attributes.addFlashAttribute("failed", "Gagal Tansfer");
                 System.out.println("Gagal Transfer");

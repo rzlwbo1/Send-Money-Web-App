@@ -75,10 +75,7 @@ public class RekeningController {
             return "form-rekening";
         }
 
-        this.nasabahService.saveNasabah(nasabah);
-        rekening.setNasabah(nasabah);
-        rekening.setProvider(provider);
-        this.rekeningService.saveRekeing(rekening);
+        this.nasabahService.saveNasabah(nasabah, provider, rekening);
 
         return "redirect:/rekening";
     }
