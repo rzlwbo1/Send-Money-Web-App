@@ -30,4 +30,10 @@ public class RekeningServiceImpl implements RekeningService{
     public Rekening findByNoRek(String noRek) {
         return this.rekeningRepo.findByNoRek(noRek);
     }
+
+    @Override
+    public void saveTransferRek(Rekening rekPengirim, Rekening rekPenerima) {
+        this.rekeningRepo.save(rekPengirim);
+        this.rekeningRepo.save(rekPenerima);
+    }
 }

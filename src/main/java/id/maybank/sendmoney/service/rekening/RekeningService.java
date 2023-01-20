@@ -10,5 +10,6 @@ public interface RekeningService {
     public List<Rekening> getAllRek();
     void saveRekeing(Rekening rekening);
     Rekening findByNoRek(String noRek);
+    void saveTransferRek(Rekening rekPengirim, Rekening rekPenerima);
 
 }

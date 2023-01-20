@@ -82,7 +82,6 @@ public class TransferController {
         String bankPengirim = rekPengirim.getProvider().getNamaBank();
         String bankPenerima = rekPenerima.getProvider().getNamaBank();
 
-
         // calculate
         Double saldoPengirim = rekPengirim.getSaldo();
         Double saldoPenerima = rekPenerima.getSaldo();
@@ -93,7 +92,7 @@ public class TransferController {
             Double minusSaldo = saldoPengirim - takeAmount;
             Double plusSaldo = saldoPenerima + takeAmount;
 
-            // update saldo
+            // update saldo and send money
             if (minusSaldo <= 50000.0) {
                 attributes.addFlashAttribute("failed", "Gagal Tansfer");
                 System.out.println("Gagal Transfer");
@@ -102,27 +101,18 @@ public class TransferController {
                 rekPengirim.setSaldo(minusSaldo);
                 rekPenerima.setSaldo(plusSaldo);
 
-                this.rekeningService.saveRekeing(rekPengirim);
-                this.rekeningService.saveRekeing(rekPenerima);
+                this.rekeningService.saveTransferRek(rekPengirim, rekPenerima);
 
                 //save ke transfer
-                LocalDateTime dateTime = LocalDateTime.now();
-
-                transfer.setSendDate(dateTime);
-                transfer.setFee(0.0);
-                transfer.setRekPengirim(rekening);
-                transfer.setRekPenerima(rekening2);
-
                 attributes.addFlashAttribute("message", "Berhasil Transfer");
-                this.transferService.saveTransfer(transfer);
+                this.transferService.saveTransfer(transfer, rekening, rekening2, 0.0);
             }
 
         } else {
             Double minusSaldo = (saldoPengirim - takeAmount) - 6500.0;
             Double plusSaldo = saldoPenerima + takeAmount;
 
-            // update saldo
-
+            // update saldo and send money
             if (minusSaldo <= 50000.0) {
                 attributes.addFlashAttribute("failed", "Gagal Tansfer");
                 System.out.println("Gagal Transfer");
@@ -130,19 +120,11 @@ public class TransferController {
                 rekPengirim.setSaldo(minusSaldo);
                 rekPenerima.setSaldo(plusSaldo);
 
-                this.rekeningService.saveRekeing(rekPengirim);
-                this.rekeningService.saveRekeing(rekPenerima);
+                this.rekeningService.saveTransferRek(rekPengirim, rekPenerima);
 
                 //save ke transfer
-                LocalDateTime dateTime = LocalDateTime.now();
-
-                transfer.setSendDate(dateTime);
-                transfer.setFee(6500.0);
-                transfer.setRekPengirim(rekening);
-                transfer.setRekPenerima(rekening2);
-
                 attributes.addFlashAttribute("message", "Berhasil Transfer");
-                this.transferService.saveTransfer(transfer);
+                this.transferService.saveTransfer(transfer, rekening, rekening2, 6500.0);
             }
 
         }

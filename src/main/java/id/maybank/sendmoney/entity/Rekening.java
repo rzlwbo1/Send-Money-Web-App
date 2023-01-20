@@ -18,7 +18,7 @@ public class Rekening {
     @Size(min = 5)
     private String noRek;
 
-    private Double saldo = 200000.0;
+    private Double saldo = 500000.0;
 
     //// Relasi ke provider ///
     @ManyToOne(fetch = FetchType.EAGER)
