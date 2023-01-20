@@ -75,7 +75,7 @@
         <div class="field">
           <label class="label">No Rekening</label>
           <div class="control">
-            <input type="text" class="input" placeholder="No rekening" th:field="${rekening.noRek}" name="noRek">
+            <input maxlength="16" type="text" class="input" placeholder="No rekening" th:field="${rekening.noRek}" name="noRek">
           </div>
           <p class="help is-danger" th:if="${#fields.hasErrors('rekening.noRek')}" th:errors="*{rekening.noRek}"></p>
         </div>
