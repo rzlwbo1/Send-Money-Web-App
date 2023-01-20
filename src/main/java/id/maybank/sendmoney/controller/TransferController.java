@@ -130,15 +130,7 @@ public class TransferController {
         }
 
 
-        LocalDateTime dateTime = LocalDateTime.now();
-
-        HistoryTransfer historyTransfer = new HistoryTransfer();
-        historyTransfer.setRekPengirim(rekPengirim.getNoRek());
-        historyTransfer.setRekPenerima(rekPenerima.getNoRek());
-        historyTransfer.setSendDate(dateTime);
-        historyTransfer.setAmountTransfer(transfer.getAmount());
-
-        this.historyService.saveHistory(historyTransfer);
+        this.historyService.saveHistory(rekPengirim, rekPenerima, transfer);
 
         return "redirect:/transfer";
     }
