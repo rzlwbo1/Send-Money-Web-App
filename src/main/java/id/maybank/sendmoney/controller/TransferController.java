@@ -6,6 +6,7 @@ import id.maybank.sendmoney.entity.TransferAmount;
 import id.maybank.sendmoney.repository.TransferRepo;
 import id.maybank.sendmoney.service.history.HistoryService;
 import id.maybank.sendmoney.service.rekening.RekeningService;
+import id.maybank.sendmoney.service.transfer.TransferService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class TransferController {
     @Autowired
     private RekeningService rekeningService;
     @Autowired
-    private TransferRepo transferRepo;
+    private TransferService transferService;
     @Autowired
     private HistoryService historyService;
 
@@ -42,7 +43,7 @@ public class TransferController {
 
 
         // list data tf
-        List<TransferAmount> transferList = this.transferRepo.findAll();
+        List<TransferAmount> transferList = this.transferService.getAllTransfer();
         model.addAttribute("transferList", transferList);
 
         return "transfer";
@@ -63,7 +64,7 @@ public class TransferController {
             model.addAttribute("rekening2", rekening2);
             model.addAttribute("transfer", transfer);
 
-            List<TransferAmount> transferList = this.transferRepo.findAll();
+            List<TransferAmount> transferList = this.transferService.getAllTransfer();
             model.addAttribute("transferList", transferList);
             System.out.println("Error");
             return "transfer";
@@ -116,7 +117,7 @@ public class TransferController {
                 transfer.setRekPenerima(rekening2);
 
                 attributes.addFlashAttribute("message", "Berhasil Transfer");
-                this.transferRepo.save(transfer);
+                this.transferService.saveTransfer(transfer);
             }
 
         } else {
@@ -144,7 +145,7 @@ public class TransferController {
                 transfer.setRekPenerima(rekening2);
 
                 attributes.addFlashAttribute("message", "Berhasil Transfer");
-                this.transferRepo.save(transfer);
+                this.transferService.saveTransfer(transfer);
             }
 
         }
