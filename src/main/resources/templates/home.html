@@ -21,6 +21,7 @@
 
   <div class="menus-utama mt-6">
     <div class="container">
+
       <div class="menus columns">
         <div class="menu-item column is-3">
           <div class="card">
@@ -62,6 +63,10 @@
           </div>
         </div>
       </div>
+
+      <form th:action="@{/logout}" method="post" name="logoutForm">
+        <input type="submit" hidden th:value="Logout" class="button is-danger">
+      </form>
     </div>
   </div>
 
