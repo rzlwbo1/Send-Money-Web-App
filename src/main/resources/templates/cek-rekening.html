@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cek Rekening</title>
+</head>
+<body>
+
+    <h1>Detail Rekening</h1>
+
+    <h4>Atas Nama : <span th:text="${rekeningInfo.nasabah.fullName}"></span></h4>
+    <p>No Rekening : <span th:text="${rekeningInfo.noRek}"></span></p>
+    <p>Nama Bank : <span th:text="${rekeningInfo.provider.namaBank}"></span></p>
+
+</body>
+</html>

@@ -35,13 +35,15 @@
           <label class="label">No Rek Pengirim</label>
           <div class="control">
             <div class="select is-fullwidth">
-              <select name="rekening">
+              <select name="rekening" id="selRekPengirim">
                 <option th:each="rekening: ${rekenings}"
                         th:field="${rekening.id}"
                         th:value="${rekening.id}"
                         th:text="${rekening.noRek}"></option>
               </select>
             </div>
+            <a th:target="_blank" class="button is-info is-small mt-3" id="linkRekPengirim"
+               th:href="@{/cek-rek/}">Cek Rekening</a>
           </div>
         </div>
 
