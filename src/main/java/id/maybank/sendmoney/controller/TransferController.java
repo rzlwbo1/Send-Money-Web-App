@@ -70,68 +70,13 @@ public class TransferController {
             return "transfer";
         }
 
-
         /// proses kirim
-        // validasi saldo pengirim stelah transfer tidak boleh < 50.0000
-
-        Rekening rekPengirim = this.rekeningService.findByNoRek(rekening.getNoRek());
-        Rekening rekPenerima = this.rekeningService.findByNoRek(rekening2.getNoRek());
-        Double takeAmount = transfer.getAmount();
-
-        // check if beda bank
-        String bankPengirim = rekPengirim.getProvider().getNamaBank();
-        String bankPenerima = rekPenerima.getProvider().getNamaBank();
-
-        // calculate
-        Double saldoPengirim = rekPengirim.getSaldo();
-        Double saldoPenerima = rekPenerima.getSaldo();
-
-
-        if (bankPengirim.equals(bankPenerima)) {
-
-            Double minusSaldo = saldoPengirim - takeAmount;
-            Double plusSaldo = saldoPenerima + takeAmount;
-
-            // update saldo and send money
-            if (minusSaldo <= 50000.0) {
-                attributes.addFlashAttribute("failed", "Gagal Tansfer");
-                System.out.println("Gagal Transfer");
-            } else {
-
-                rekPengirim.setSaldo(minusSaldo);
-                rekPenerima.setSaldo(plusSaldo);
-
-                this.rekeningService.saveTransferRek(rekPengirim, rekPenerima);
-
-                //save ke transfer
-                attributes.addFlashAttribute("message", "Berhasil Transfer");
-                this.transferService.saveTransfer(transfer, rekening, rekening2, 0.0);
-            }
-
+        Boolean statusTF = this.transferService.saveTransfer(transfer, rekening, rekening2);
+        if (statusTF) {
+            attributes.addFlashAttribute("message", "Berhasil Transfer");
         } else {
-            Double minusSaldo = (saldoPengirim - takeAmount) - 6500.0;
-            Double plusSaldo = saldoPenerima + takeAmount;
-
-            // update saldo and send money
-            if (minusSaldo <= 50000.0) {
-                attributes.addFlashAttribute("failed", "Gagal Tansfer");
-                System.out.println("Gagal Transfer");
-            } else {
-                rekPengirim.setSaldo(minusSaldo);
-                rekPenerima.setSaldo(plusSaldo);
-
-                this.rekeningService.saveTransferRek(rekPengirim, rekPenerima);
-
-                //save ke transfer
-                attributes.addFlashAttribute("message", "Berhasil Transfer");
-                this.transferService.saveTransfer(transfer, rekening, rekening2, 6500.0);
-            }
-
+            attributes.addFlashAttribute("failed", "Gagal Transfer");
         }
-
-
-        this.historyService.saveHistory(rekPengirim, rekPenerima, transfer);
-
         return "redirect:/transfer";
     }
 

@@ -8,6 +8,6 @@ import java.util.List;
 public interface TransferService {
 
     List<TransferAmount> getAllTransfer();
-    void saveTransfer(TransferAmount transfer, Rekening rekPengirim, Rekening rekPenerima, Double fee);
+    Boolean saveTransfer(TransferAmount transfer, Rekening rekPengirim, Rekening rekPenerima);
 
 }
